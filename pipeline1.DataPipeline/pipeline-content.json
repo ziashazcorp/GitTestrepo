@@ -1,0 +1,351 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true
+            },
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "public",
+                  "folderPath": "curated/covid-19/bing_covid-19_data/latest",
+                  "fileName": "bing_covid-19_data.csv"
+                },
+                "columnDelimiter": ",",
+                "rowDelimiter": "\n",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [
+                {
+                  "name": "id",
+                  "type": "String"
+                },
+                {
+                  "name": "updated",
+                  "type": "String"
+                },
+                {
+                  "name": "confirmed",
+                  "type": "String"
+                },
+                {
+                  "name": "confirmed_change",
+                  "type": "String"
+                },
+                {
+                  "name": "deaths",
+                  "type": "String"
+                },
+                {
+                  "name": "deaths_change",
+                  "type": "String"
+                },
+                {
+                  "name": "recovered",
+                  "type": "String"
+                },
+                {
+                  "name": "recovered_change",
+                  "type": "String"
+                },
+                {
+                  "name": "latitude",
+                  "type": "String"
+                },
+                {
+                  "name": "longitude",
+                  "type": "String"
+                },
+                {
+                  "name": "iso2",
+                  "type": "String"
+                },
+                {
+                  "name": "iso3",
+                  "type": "String"
+                },
+                {
+                  "name": "country_region",
+                  "type": "String"
+                },
+                {
+                  "name": "admin_region_1",
+                  "type": "String"
+                },
+                {
+                  "name": "iso_subdivision",
+                  "type": "String"
+                },
+                {
+                  "name": "admin_region_2",
+                  "type": "String"
+                },
+                {
+                  "name": "load_time",
+                  "type": "String"
+                }
+              ],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://pandemicdatalake.blob.core.windows.net/public"
+                  }
+                },
+                "name": "bing_covid_19"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Overwrite",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "table": "bing_covid_19_data"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9c6e8a72-ddd3-473e-ac78-360ffec2f695",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH01"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "id",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "id",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "updated",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "updated",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "confirmed",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "confirmed",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "confirmed_change",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "confirmed_change",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "deaths",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "deaths",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "deaths_change",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "deaths_change",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "recovered",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "recovered",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "recovered_change",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "recovered_change",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "latitude",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "latitude",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "longitude",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "longitude",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "iso2",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "iso2",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "iso3",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "iso3",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "country_region",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "country_region",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "admin_region_1",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "admin_region_1",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "iso_subdivision",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "iso_subdivision",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "admin_region_2",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "admin_region_2",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "load_time",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "load_time",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_an4",
+        "dependsOn": []
+      }
+    ],
+    "annotations": []
+  }
+}
